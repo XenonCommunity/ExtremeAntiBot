@@ -3,7 +3,6 @@ package ir.realstresser.extreme.shared.util;
 import ir.realstresser.extreme.velocity.Main;
 import lombok.Cleanup;
 import lombok.Getter;
-import lombok.Value;
 import lombok.experimental.UtilityClass;
 
 import java.sql.*;

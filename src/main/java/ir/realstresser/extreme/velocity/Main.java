@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 @Plugin(id = "extreme_ab", name = "ExtremeAntiBot", version = "0", description = "a lightweight antibot", authors = "realstresser")
 @SuppressWarnings("unused") public class Main {
@@ -45,12 +46,17 @@ import java.nio.file.Paths;
 
             Main.getInstance().getLogger().info("Initializing checks...");
 
+            System.out.println(Arrays.toString(getConfigData().getChecks()));
+
             new Reflections("ir.realstresser.extreme.velocity.check").getSubTypesOf(CheckBase.class).forEach(c -> {
-                try {
-                    getServer().getEventManager().register(this, c.newInstance());
-                } catch (Exception ex) {
-                    getLogger().error(ex.getMessage());
-                }
+                Arrays.stream(getConfigData().getChecks()).filter(s -> c.getSimpleName().equals(s)).forEach(s -> {
+                    try {
+                        getLogger().info("Adding check " + c.getSimpleName());
+                        getServer().getEventManager().register(this, c.newInstance());
+                    } catch (Exception ex) {
+                        getLogger().error(ex.getMessage());
+                    }
+                });
             });
 
             Main.getInstance().getLogger().info("Successfully initialized!");
