@@ -1,0 +1,7 @@
+# plugin prefix. you can use your specified prefix.
+prefix: "[ExtremeAB]"
+# what stuff should we check? (!!!!DO NOT REMOVE PlayerInserter!!!!)
+# Available: ProxyChecker
+checks:
+  - PlayerInserter
+  - ProxyChecker
