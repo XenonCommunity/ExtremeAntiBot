@@ -1,11 +1,5 @@
 package ir.realstresser.extreme.velocity.check.packetlisteners;
 
-import com.github.retrooper.packetevents.PacketEvents;
-import com.github.retrooper.packetevents.event.PacketListener;
-import com.github.retrooper.packetevents.event.PacketReceiveEvent;
-import com.github.retrooper.packetevents.protocol.packettype.PacketType;
-import com.github.retrooper.packetevents.protocol.player.User;
-import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientSteerVehicle;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.plugin.PluginContainer;
 import ir.realstresser.extreme.shared.check.CheckBase;
@@ -17,10 +11,7 @@ import net.elytrium.limboapi.api.chunk.Dimension;
 import net.elytrium.limboapi.api.event.LoginLimboRegisterEvent;
 import net.elytrium.limboapi.api.player.LimboPlayer;
 
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-@SuppressWarnings("unused") public class LimboConnector extends CheckBase implements LimboSessionHandler, PacketListener {
+@SuppressWarnings("unused") public class LimboConnector extends CheckBase implements LimboSessionHandler {
     private final Limbo limboServer;
 
     public LimboConnector() {

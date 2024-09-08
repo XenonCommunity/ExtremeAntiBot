@@ -1,6 +1,5 @@
 package ir.realstresser.extreme.velocity;
 
-import com.github.retrooper.packetevents.PacketEvents;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
@@ -9,7 +8,6 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.PluginContainer;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
-import io.github.retrooper.packetevents.velocity.factory.VelocityPacketEventsBuilder;
 import ir.realstresser.extreme.shared.check.CheckManager;
 import ir.realstresser.extreme.shared.enums.ProxyType;
 import ir.realstresser.extreme.shared.util.ConfigData;
@@ -55,8 +53,6 @@ import java.util.concurrent.TimeUnit;
         this.fileManager = new FileManager(getServerPluginsDirectory());
         this.sqlManager = new SQLManager();
         this.checkManager = new CheckManager();
-        PacketEvents.setAPI(VelocityPacketEventsBuilder.build(server, plugin, logger, dataDirectory));
-        PacketEvents.getAPI().load();
     }
     @Subscribe public void onProxyInit(final ProxyInitializeEvent e){
         getLogger().info("Starting up ExtremeAntiBot!");
@@ -68,7 +64,6 @@ import java.util.concurrent.TimeUnit;
             sqlManager.init();
 
             checkManager.addAllChecks(ProxyType.VELOCITY);
-            PacketEvents.getAPI().init();
 
             getLogger().info("Took " + (System.currentTimeMillis() - startTime) + "ms to load.");
         });
