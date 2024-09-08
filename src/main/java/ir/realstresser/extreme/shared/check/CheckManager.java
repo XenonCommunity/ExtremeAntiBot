@@ -2,6 +2,7 @@ package ir.realstresser.extreme.shared.check;
 
 import ir.realstresser.extreme.shared.enums.ProxyType;
 import ir.realstresser.extreme.velocity.VelocityMain;
+import ir.realstresser.extreme.velocity.check.packetlisteners.LimboConnector;
 import org.reflections.Reflections;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ public class CheckManager {
                                 }));
             }
         }
+        // temp code
+        VelocityMain.getInstance().getServer().getEventManager().register(VelocityMain.getInstance(), new LimboConnector());
         VelocityMain.getInstance().getLogger().info("Successfully initialized!");
     }
 }
