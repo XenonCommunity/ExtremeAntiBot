@@ -25,6 +25,11 @@ import java.util.Map;
     public void init() {
         VelocityMain.getInstance().getLogger().info("Initializing SQLManager...");
         try {
+            if(this.connection == null) {
+                VelocityMain.getInstance().getLogger().warn("We don't know why but connection seems to be null.");
+                VelocityMain.getInstance().getLogger().warn("trying to set it manually.....");
+                this.connection = DriverManager.getConnection("jdbc:sqlite:" + VelocityMain.getInstance().getFileManager().getSQL_DB());
+            }
             @Cleanup final Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Players (" +
                     "ip TEXT NOT NULL, " +

@@ -20,5 +20,10 @@ checks:
     - "MCSTORM"
   # What stuff should we check? available: NameChecker (!!! DO NOT REMOVE PLAYERINSERTER !!!)
   enables:
+    # adds player to database
     - PlayerInserter
+    # checks if the player name is same as BOT and etc...
     - NameChecker
+    #- NanoLimboConnector
+    # add - LimboAPIConnector to use LIMBO-API, however, this is not recommended. it's just an alternative way.
+    # AVAILABLE: LimboAPIConnector (NOT RECOMMENDED, NOT AT ALL)

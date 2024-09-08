@@ -31,7 +31,6 @@ import java.util.concurrent.TimeUnit;
         description = "a lightweight antibot",
         authors = "realstresser",
         dependencies = {
-        @Dependency(id = "limboapi")
         })
 @SuppressWarnings("unused") public class VelocityMain {
     @Getter public static VelocityMain instance;
