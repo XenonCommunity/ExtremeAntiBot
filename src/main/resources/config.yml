@@ -1,7 +1,24 @@
 # plugin prefix. you can use your specified prefix.
-prefix: "[ExtremeAB]"
-# what stuff should we check? (!!!!DO NOT REMOVE PlayerInserter!!!!)
-# Available: ProxyChecker
+prefix: "&c[ExtremeAB]"
+# kick message. SECONDS will be replaced with how many seconds the player needs to wait before reconnecting.
+kickmessage: "&cWe're sorry. you got kicked from the server. please try again in SECONDS seconds."
+# violations. you can set max violations. something like blacklisting system.
+maxviolations: 1 #recommended 1, it'll trigger blacklist with only one check
+# how should we blacklist players? (AVAILABLE: IP, UUID)
+# ip is recommended.
+blacklistby: "ip"
+# after how many seconds, should we allow players to reconnect? (blacklisted players)
+# set to -1, if you don't want them to get unblocked, again. (not recommended, not at all)
+reconnectionseconds: "900" # 15 mins
 checks:
-  - PlayerInserter
-  - ProxyChecker
+  #This part will configure violations for each check to add to a player.
+  namechecker: 1 #recommended max, it'll blacklist names starting with:
+  # what names should we check?
+  namecheckernames:
+    - "BOT"
+    - "bot"
+    - "MCSTORM"
+  # What stuff should we check? available: NameChecker (!!! DO NOT REMOVE PLAYERINSERTER !!!)
+  enables:
+    - PlayerInserter
+    - NameChecker

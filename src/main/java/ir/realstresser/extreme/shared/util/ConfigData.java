@@ -9,7 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@SuppressWarnings("unused")
 public class ConfigData {
     private String prefix;
-    private String[] checks;
+    private String kickmessage;
+    private int maxviolations;
+    private String blacklistby;
+    private int reconnectionseconds;
+    private ChecksData checks;
 }

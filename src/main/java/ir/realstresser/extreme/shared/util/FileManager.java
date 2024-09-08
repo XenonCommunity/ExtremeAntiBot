@@ -1,17 +1,18 @@
 package ir.realstresser.extreme.shared.util;
 
-import ir.realstresser.extreme.velocity.Main;
+import ir.realstresser.extreme.velocity.VelocityMain;
 import lombok.Cleanup;
 import lombok.Getter;
+import lombok.NonNull;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
-@Getter
-public class FileManager {
+@Getter public class FileManager {
     private final File ExtremeFolder;
     private final File SQL_DB;
     private final File CONFIG_FILE;
@@ -23,21 +24,21 @@ public class FileManager {
     }
 
     public void init() {
-        Main.getInstance().getLogger().info("Initializing FileManager...");
+        VelocityMain.getInstance().getLogger().info("Initializing FileManager...");
         try {
             if (!ExtremeFolder.exists()) ExtremeFolder.mkdirs();
             if (!SQL_DB.exists()) Files.createFile(SQL_DB.toPath());
             if (!CONFIG_FILE.exists()) copyConfig();
-            Main.getInstance().setConfigData(getConfig());
+            VelocityMain.getInstance().setConfigData(getConfig());
         } catch (final Exception e) {
-            Main.getInstance().getLogger().error(e.getMessage());
+            VelocityMain.getInstance().getLogger().error(e.getMessage());
         }
-        Main.getInstance().getLogger().info("Successfully initialized!");
+        VelocityMain.getInstance().getLogger().info("Successfully initialized!");
     }
 
     private void copyConfig() {
         try {
-            @Cleanup final InputStream in = getClass().getClassLoader().getResourceAsStream("config.yml");
+            @NonNull @Cleanup final InputStream in = Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("config.yml"));
             @Cleanup final BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             @Cleanup final BufferedWriter writer = new BufferedWriter(new FileWriter(CONFIG_FILE));
 
@@ -47,17 +48,16 @@ public class FileManager {
                 writer.newLine();
             }
         } catch (final Exception e) {
-            Main.getInstance().getLogger().error(e.getMessage());
+            VelocityMain.getInstance().getLogger().error(e.getMessage());
         }
     }
 
     public ConfigData getConfig() {
         try {
-            @Cleanup
-            final FileInputStream is = new FileInputStream(CONFIG_FILE);
+            @Cleanup final FileInputStream is = new FileInputStream(CONFIG_FILE);
             return new Yaml(new Constructor(ConfigData.class)).loadAs(is, ConfigData.class);
         } catch (final Exception e) {
-            Main.getInstance().getLogger().error(e.getMessage());
+            VelocityMain.getInstance().getLogger().error(e.getMessage());
             return null;
         }
     }
